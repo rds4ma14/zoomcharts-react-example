@@ -17,12 +17,14 @@
     "babel-preset-react": "^6.24.1",
     "copy-webpack-plugin": "^4.5.2",
     "webpack": "^4.16.2",
-    "webpack-cli": "^2.1.5",
-    "webpack-dev-server": "^3.1.5"
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
     "@dvsl/zoomcharts": "^1.18.4",
+    "babel-core": "^6.26.3",
+    "development": "0.0.6",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
-  }  
-} 
+  }
+}
