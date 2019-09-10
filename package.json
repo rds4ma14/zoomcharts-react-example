@@ -25,6 +25,7 @@
     "babel-core": "^6.26.3",
     "development": "0.0.6",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "react-dom": "^16.4.1",
+    "solr-node": "^1.2.1"
   }
 }
