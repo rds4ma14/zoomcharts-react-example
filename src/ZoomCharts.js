@@ -3,30 +3,6 @@ import zc from '@dvsl/zoomcharts';
 const TimeChart = zc.TimeChart;
 const license = require("./License.json");
 
-
-const SolrNode = require('solr-node');
-
-// console.log(SolrNode);
-
-var client = new SolrNode({
-  host: '127.0.0.1',
-  port: '8983',
-  core: 'collection1',
-  protocol: 'http'
-});
-
-let consulta1 = client.query().q({text:'test', title:'test'});
-let consulta2 = 'q=*%3A*&wt=json';
-// console.log('consulta',consulta1.params);
-var result = client.search(consulta2)
-    .then(function(result) {
-      console.log('Response:', result.response);
-    })
-    .catch(function(err) {
-      console.error(err);
-    });
-
-
 // Zoomcharts license and license key
 window.ZoomChartsLicense = license.License;
 window.ZoomChartsLicenseKey = license.LicenseKey;
