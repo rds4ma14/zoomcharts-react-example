@@ -14,7 +14,7 @@ app.use(function(req, res, next) {
     next();  
   });
 
-app.get('/solr/', (req, res) => {
+app.get('/solr/', async (req, res) => {
 
   const SolrNode = require('solr-node');
 
@@ -28,7 +28,7 @@ app.get('/solr/', (req, res) => {
   let consulta1 = client.query().q({text:'test', title:'test'});
   let consulta2 = 'q=*%3A*&wt=json';
   // console.log('consulta',consulta1.params);
-  var result = client.search(consulta2)
+  var result = await client.search(consulta2)
       .then(function (result, resolve) {
         console.log('Response:', result.response.docs);        
       })
