@@ -30,14 +30,27 @@ app.get('/solr/', async (req, res) => {
   // console.log('consulta',consulta1.params);
   var result = await client.search(consulta2)
       .then(function (result, resolve) {
-        console.log('Response:', result.response.docs);        
+        console.log('Response:', 'taaq'/*result.response.doc*/);
+        return result;        
       })
       .catch(function(err) {
         console.error(err);
       });
 
+  let trans = result.response.docs.map((obj,index,array) => {
+    var text = "";
+    var x;
+    for (x in obj) {
+      text += obj[x] + " ";
+    }
+    let test = '<li>'+text+"</li>";
+    
+    return test;
+  });
+
+  console.log(trans); 
+  // console.log('oibonitono', result.response.docs);
   
-  console.log('oibonitono', result);
   res.send(`<!DOCTYPE html>
   <html lang="en">
   <head>
@@ -45,17 +58,12 @@ app.get('/solr/', async (req, res) => {
   <title></title>
   </head>
   <body>
-      <span>Hello genti bonita</span>
-      <span>${result}</span>
+      <span>Hello genti bonita</span><br>
+      <ul>${trans}</ul>
   </body>
   </html>`)
 });
 
-app.get('/solrr/', (req, res) => {
-  //   const name = req.query.name || 'World';
-  //   res.setHeader('Content-Type', 'application/json');
-  //   res.send(JSON.stringify({ greeting: `Hello ${name}!` }));
-});
 
 app.listen(9001, () =>
   console.log('Express server is running on localhost:9001')
