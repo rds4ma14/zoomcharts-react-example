@@ -21,7 +21,7 @@ app.get('/solr/', async (req, res) => {
   var client = new SolrNode({
     host: '127.0.0.1',
     port: '8983',
-    core: 'collection1',
+    core: 'techproducts',
     protocol: 'http'
   });
 
@@ -30,25 +30,14 @@ app.get('/solr/', async (req, res) => {
   // console.log('consulta',consulta1.params);
   var result = await client.search(consulta2)
       .then(function (result, resolve) {
-        console.log('Response:', 'taaq'/*result.response.doc*/);
+        console.log('Response:', result.response.docs);
         return result;        
       })
       .catch(function(err) {
         console.error(err);
       });
 
-  let trans = result.response.docs.map((obj,index,array) => {
-    var text = "";
-    var x;
-    for (x in obj) {
-      text += obj[x] + " ";
-    }
-    let test = '<li>'+text+"</li>";
-    
-    return test;
-  });
 
-  console.log(trans); 
   // console.log('oibonitono', result.response.docs);
   
   res.send(`<!DOCTYPE html>
@@ -59,7 +48,7 @@ app.get('/solr/', async (req, res) => {
   </head>
   <body>
       <span>Hello genti bonita</span><br>
-      <ul>${trans}</ul>
+      <ul></ul>
   </body>
   </html>`)
 });
