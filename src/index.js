@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ZoomCharts from './ZoomCharts';
+import PieCharts from './PieCharts';
 
-ReactDOM.render(<ZoomCharts />, document.getElementById('root'));
+ReactDOM.render(<PieCharts />, document.getElementById('root'));

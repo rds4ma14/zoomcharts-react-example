@@ -21,14 +21,16 @@ app.get('/solr/', async (req, res) => {
   var client = new SolrNode({
     host: '127.0.0.1',
     port: '8983',
-    core: 'techproducts',
+    core: 'my-core',
     protocol: 'http'
   });
 
   let consulta1 = client.query().q({text:'test', title:'test'});
-  let consulta2 = 'q=*%3A*&wt=json';
-  // console.log('consulta',consulta1.params);
-  var result = await client.search(consulta2)
+
+  // let consulta2 = 'q=*%3A*&wt=json';
+  let consulta3 = 'q=*%3A*&wt=json';
+  
+  var result = await client.search(consulta3)
       .then(function (result, resolve) {
         console.log('Response:', result.response.docs);
         return result;        
