@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const app = express();
+var fs = require('fs');
+
 // const solr = require('./../src/Solr')
 
 
@@ -28,19 +30,33 @@ app.get('/solr/', async (req, res) => {
   let consulta1 = client.query().q({text:'test', title:'test'});
 
   // let consulta2 = 'q=*%3A*&wt=json';
-  let consulta3 = 'q=*%3A*&wt=json';
+  let consulta3 = 'q=*%3A*&rows=20&wt=json';
   
-  var result = await client.search(consulta3)
+  var results = await client.search(consulta3)
       .then(function (result, resolve) {
         console.log('Response:', result.response.docs);
-        return result;        
+        return result.response.docs;        
       })
       .catch(function(err) {
         console.error(err);
       });
+      
+      // resultsJson = JSON.stringify(results);
+      // console.log('JSON',resultsJson);
+
+    var data = results.map(function(result) {
+      // console.log('testinho', result);   
+      return {id:result.id, name:result.name[0], value:result.price[0]};
+    });
+
+  data = {subvalues:data};
+  
+  fs.writeFile('./src/resultado.json', JSON.stringify(data, null, 4), function(err) {
+    console.log('JSON escrito com sucesso!')
+  })
 
 
-  // console.log('oibonitono', result.response.docs);
+  console.log('oi bonitono', data);
   
   res.send(`<!DOCTYPE html>
   <html lang="en">

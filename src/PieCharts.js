@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import zc from '@dvsl/zoomcharts';
 const PieChart = zc.PieChart;
 const license = require("./License.json");
-// const data = require("./    ");
+const data = require("./resultado.json");
 
 // Zoomcharts license and license key
 window.ZoomChartsLicense = license.License;
@@ -15,7 +15,7 @@ class PieCharts extends Component {
         var chart = new PieChart({
             container: document.getElementById('pieChart'),
             assetsUrlBase:'./../node_modules/@dvsl/zoomcharts/lib/assets',
-            area: { height: 350 },
+            area: { height: 500 },
             interaction: {
                 mode: "select",
                 resizing: {
@@ -32,16 +32,12 @@ class PieCharts extends Component {
             },
 
             data: { 
-                preloaded: {
-                    
-                    subvalues: [
-                        {
-                            url: "\/browsers-extended.json"
-                        }
-                    ]
-                }
-            },
-            toolbar: {
+              
+                preloaded: data                    
+                
+             },
+            
+             toolbar: {
                 fullscreen: true,
                 enabled: true
             }
