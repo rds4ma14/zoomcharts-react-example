@@ -34,20 +34,22 @@ app.get('/solr/', async (req, res) => {
   
   var results = await client.search(consulta3)
       .then(function (result, resolve) {
-        console.log('Response:', result.response.docs);
+        // console.log('Response:', result.response.docs);
         return result.response.docs;        
       })
       .catch(function(err) {
         console.error(err);
       });
       
-      // resultsJson = JSON.stringify(results);
-      // console.log('JSON',resultsJson);
-
+    
     var data = results.map(function(result) {
       // console.log('testinho', result);   
       return {id:result.id, name:result.name[0], value:result.price[0]};
     });
+    
+    data.sort(function(a,b) {
+      return a.value > b.value ? -1 : a.value < b.value ? 1 : 0;
+  }); 
 
   data = {subvalues:data};
   
@@ -56,7 +58,7 @@ app.get('/solr/', async (req, res) => {
   })
 
 
-  console.log('oi bonitono', data);
+  // console.log('oi bonitono', data);
   
   res.send(`<!DOCTYPE html>
   <html lang="en">
